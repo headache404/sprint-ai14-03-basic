@@ -31,19 +31,9 @@
 ```
 project/
 ├── data/
-│   ├── images/
-│   │   ├── train/                  # 182장 (원본 이미지)
-│   │   ├── val/                    # 50장
-│   │   └── test/                   # 842장 (라벨 없음)
-│   ├── yolo_labels/
-│   │   ├── train/*.txt             # 182개 (이미지 1장당 라벨 1개)
-│   │   ├── val/*.txt               # 50개
-│   │   ├── train_oversampled.txt   # 311줄 (오버샘플링 반영된 학습 이미지 목록)
-│   │   ├── data.yaml               # YOLO 학습 설정 파일
-│   │   └── classes.txt             # 클래스 번호 ↔ 이름 매핑
-│   ├── coco_annotations/
-│   │   ├── train.json              # 이미지 311(오버샘플링 반영, 중복 참조) / annotation 1105
-│   │   └── val.json                # 이미지 50 / annotation 167
+│   ├── images/                     # train, val, test image
+│   ├── yolo_labels/                # 이미지 1장당 라벨 1개
+│   ├── coco_annotations/           # train, val json
 ├── models/                         # 모델 정의
 ├── notebooks/                      # 데이터 탐색을 위한 노트북
 ├── utils/                          # 데이터 로딩 유틸리티
