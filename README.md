@@ -39,6 +39,7 @@ project/
 ├── result/                         # 모델 결과 CSV 파일
 ├── utils/                          # 데이터 로딩 유틸리티
 ├── main.py                         # 메인 실행 스크립트
+├── environment.yml                 # conda 설치 패키지 목록
 └── README.md
 ```
  
