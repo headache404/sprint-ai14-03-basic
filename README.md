@@ -84,4 +84,4 @@ python main.py
  
 ## 📝 참고 사항
  
-- ...
+- Image, json, txt, csv 파일은 별도 업로드 하지 않습니다

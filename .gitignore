@@ -11,6 +11,9 @@ result/*.csv
 # project_data 이미지 업로드 제외 합니다
 sprint_ai_project1_data/
 
+# 파이썬 캐시
+__pycache__/
+
 # =========================================================================
 # Exceptions (GitHub에 반드시 올려야 하는 예외 파일 지정)
 # 예) !requirements.txt
