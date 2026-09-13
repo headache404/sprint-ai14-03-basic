@@ -36,6 +36,7 @@ project/
 │   ├── coco_annotations/           # train, val json
 ├── models/                         # 모델 정의
 ├── notebooks/                      # 데이터 탐색을 위한 노트북
+├── result/                         # 모델 결과 CSV 파일
 ├── utils/                          # 데이터 로딩 유틸리티
 ├── main.py                         # 메인 실행 스크립트
 └── README.md
