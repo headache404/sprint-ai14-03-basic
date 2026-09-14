@@ -17,6 +17,14 @@ run() 함수 안에 실제 학습/추론 코드를 구현.
 """
  
 import os
+import sys
+
+# 이 파일을 "python models/models_yolo.py"처럼 직접 실행해도
+# project_root(models 폴더의 상위 폴더)를 항상 찾을 수 있도록 경로를 보정한다.
+_PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+
 from models import result
 
 def run(project_root: str) -> None:
