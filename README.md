@@ -8,11 +8,11 @@
 🏷️ 팀명 **1423**
 | 이름 | 역할 | GitHub |
 |------|------|--------|
-| 서동현 | Project Leader | [@github_id](https://github.com/github_id) |
-| 김주희 | Data Engineer | [@github_id](https://github.com/github_id) |
-| 조영권 | Model Architect | [@github_id](https://github.com/github_id) |
-| 김원태 | Experimentation Lead | [@github_id](https://github.com/github_id) |
-| 이석우 | Experimentation Lead | [@github_id](https://github.com/github_id) |
+| 서동현 | Project Leader | [@github](https://github.com/headache404) |
+| 김원태 | Experimentation Lead | [@github](https://github.com/andyKim0313) |
+| 김주희 | Data Engineer | [@github](https://github.com/juhee4839) |
+| 이석우 | Experimentation Lead | [@github](https://github.com/SUKWOOLEE-249) |
+| 조영권 | Model Architect | [@github](https://github.com/Young9won) |
 
 ---
  
