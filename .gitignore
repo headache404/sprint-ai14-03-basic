@@ -19,3 +19,9 @@ __pycache__/
 # 예) !requirements.txt
 # =========================================================================
 !.gitkeep
+
+# Local YOLO review outputs
+/weights/
+/runs/
+/local-review/
+**/.ipynb_checkpoints/

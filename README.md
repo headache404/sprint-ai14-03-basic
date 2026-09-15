@@ -32,7 +32,8 @@
 project/
 ├── data/
 │   ├── images/                     # train, val, test image
-│   ├── yolo_labels/                # 이미지 1장당 라벨 1개
+│   ├── labels/                     # Ultralytics YOLO 라벨 (train, val)
+│   ├── yolo_labels/                # data.yaml, 클래스 및 오버샘플링 목록
 │   ├── coco_annotations/           # train, val json
 ├── models/                         # 모델 정의
 ├── notebooks/                      # 데이터 탐색을 위한 노트북
@@ -40,6 +41,7 @@ project/
 ├── utils/                          # 데이터 로딩 유틸리티
 ├── main.py                         # 메인 실행 스크립트
 ├── environment.yml                 # conda 설치 패키지 목록
+├── requirements.colab.txt          # Colab에서 추가 설치할 패키지
 └── README.md
 ```
  
@@ -50,9 +52,28 @@ project/
 pip install torch torchvision
 ```
  
-**2. 모델 학습 및 평가**
+**2. 최초 데이터 전처리**
 ```bash
-python main.py
+python main.py --preprocess --model none
+```
+
+**3. YOLO 연결 시험**
+```bash
+python main.py --skip --model yolo --yolo-smoke
+```
+
+**4. YOLOv8n baseline 학습 및 평가**
+```bash
+python main.py --skip --model yolo
+```
+
+로컬에 CUDA를 지원하는 NVIDIA GPU가 없으면
+`notebooks/03_YOLO_Colab_GPU_학습.ipynb`를 Colab에서 열고 위에서부터 실행합니다.
+노트북은 GPU 확인, Kaggle 데이터 다운로드, 전처리, 시험 학습, baseline 학습과 결과 보존을 안내합니다.
+
+학습 후 test 이미지의 YOLO 형식 예측 라벨까지 만들려면 옵션을 추가합니다.
+```bash
+python main.py --skip --model yolo --yolo-predict-test
 ```
 
 ---

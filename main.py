@@ -1,4 +1,4 @@
-"""
+r"""
 경구약제 객체 검출 프로젝트 - 실행 진입점
 
 전처리 옵션:
@@ -82,8 +82,9 @@ def run_preprocessing_step(args) -> None:
     )
 
 
-def run_selected_models(model_choice: str) -> None:
+def run_selected_models(args) -> None:
     """--model 옵션에 따라 지정된 모델 스크립트의 run(project_root)를 호출한다."""
+    model_choice = args.model
     if model_choice == "none":
         return
 
@@ -107,7 +108,32 @@ def run_selected_models(model_choice: str) -> None:
             continue
 
         try:
-            run_func(PROJECT_ROOT)
+            if key == "yolo":
+                run_func(
+                    PROJECT_ROOT,
+                    weights=args.yolo_weights,
+                    epochs=args.yolo_epochs,
+                    imgsz=args.yolo_imgsz,
+                    batch=args.yolo_batch,
+                    device=args.yolo_device,
+                    workers=args.yolo_workers,
+                    run_name=args.yolo_name,
+                    smoke_test=args.yolo_smoke,
+                    predict_test=args.yolo_predict_test,
+                    conf=args.yolo_conf,
+                    iou=args.yolo_iou,
+                    degrees=args.yolo_degrees,
+                    hsv_h=args.yolo_hsv_h,
+                    hsv_s=args.yolo_hsv_s,
+                    hsv_v=args.yolo_hsv_v,
+                    fliplr=args.yolo_fliplr,
+                    flipud=args.yolo_flipud,
+                    translate=args.yolo_translate,
+                    scale=args.yolo_scale,
+                    mosaic=args.yolo_mosaic,
+                )
+            else:
+                run_func(PROJECT_ROOT)
         except NotImplementedError as e:
             print(f"[안내] {label} 담당자 구현 대기 중: {e}")
 
@@ -136,10 +162,51 @@ def main():
         "--model", choices=["none", "faster", "yolo", "both"], default="none",
         help="전처리 이후 실행할 모델 선택 (기본값: none = 실행 안 함)"
     )
+    yolo_group = parser.add_argument_group("YOLO 실행 옵션")
+    yolo_group.add_argument("--yolo-weights", default="yolov8n.pt",
+                            help="시작 가중치 경로 또는 Ultralytics 모델명 (기본 yolov8n.pt)")
+    yolo_group.add_argument("--yolo-epochs", type=int, default=100,
+                            help="학습 epoch 수 (기본 100)")
+    yolo_group.add_argument("--yolo-imgsz", type=int, default=640,
+                            help="학습 이미지 크기 (기본 640)")
+    yolo_group.add_argument("--yolo-batch", type=int, default=4,
+                            help="batch 크기 (기본 4)")
+    yolo_group.add_argument("--yolo-device", default=None,
+                            help="cpu, 0 등 학습 장치 (미지정 시 자동 선택)")
+    yolo_group.add_argument("--yolo-workers", type=int, default=0,
+                            help="데이터 로더 worker 수 (Windows 기본 0)")
+    yolo_group.add_argument("--yolo-name", default="yolov8n_baseline",
+                            help="runs/yolo 아래에 기록할 실험 이름")
+    yolo_group.add_argument("--yolo-smoke", action="store_true",
+                            help="연결 확인용: 데이터 5%%, 1 epoch, imgsz 최대 320으로 실행")
+    yolo_group.add_argument("--yolo-predict-test", action="store_true",
+                            help="학습·검증 후 test 이미지 추론 라벨까지 생성")
+    yolo_group.add_argument("--yolo-conf", type=float, default=0.001,
+                            help="test 추론 confidence 기준 (기본 0.001)")
+    yolo_group.add_argument("--yolo-iou", type=float, default=0.7,
+                            help="test 추론 NMS IoU 기준 (기본 0.7)")
+    yolo_group.add_argument("--yolo-degrees", type=float, default=10.0,
+                            help="회전 증강 각도 범위 (기본 10)")
+    yolo_group.add_argument("--yolo-hsv-h", type=float, default=0.02,
+                            help="색상 hue 증강 강도 (기본 0.02)")
+    yolo_group.add_argument("--yolo-hsv-s", type=float, default=0.6,
+                            help="색상 saturation 증강 강도 (기본 0.6)")
+    yolo_group.add_argument("--yolo-hsv-v", type=float, default=0.5,
+                            help="밝기 value 증강 강도 (기본 0.5)")
+    yolo_group.add_argument("--yolo-fliplr", type=float, default=0.3,
+                            help="좌우 반전 확률 (기본 0.3)")
+    yolo_group.add_argument("--yolo-flipud", type=float, default=0.0,
+                            help="상하 반전 확률 (기본 0.0)")
+    yolo_group.add_argument("--yolo-translate", type=float, default=0.1,
+                            help="평행 이동 증강 강도 (기본 0.1)")
+    yolo_group.add_argument("--yolo-scale", type=float, default=0.3,
+                            help="크기 조절 증강 강도 (기본 0.3)")
+    yolo_group.add_argument("--yolo-mosaic", type=float, default=0.5,
+                            help="mosaic 증강 확률 (기본 0.5)")
     args = parser.parse_args()
 
     run_preprocessing_step(args)
-    run_selected_models(args.model)
+    run_selected_models(args)
 
 
 if __name__ == "__main__":
