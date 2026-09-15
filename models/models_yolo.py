@@ -175,7 +175,9 @@ def run(
         "deterministic": True,
         "project": str(runs_root),
         "name": run_name,
-        "val": False,
+        # 매 epoch마다 validation 성능을 계산해야 best.pt가
+        # 가장 좋은 검증 성능의 가중치로 선택된다.
+        "val": True,
         **augmentation,
     }
     if selected_device is not None:
