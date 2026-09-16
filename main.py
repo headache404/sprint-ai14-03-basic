@@ -33,7 +33,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 DONE_MARKERS = [
     os.path.join(PROJECT_ROOT, "data", "coco_annotations", "train.json"),
     os.path.join(PROJECT_ROOT, "data", "coco_annotations", "val.json"),
-    os.path.join(PROJECT_ROOT, "data", "yolo_labels", "data.yaml"),
+    os.path.join(PROJECT_ROOT, "data", "labels", "data.yaml"),
 ]
 
 # --model 옵션 값 -> (표시용 이름, import할 모듈 경로)

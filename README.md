@@ -32,7 +32,7 @@
 project/
 ├── data/
 │   ├── images/                     # train, val, test image
-│   ├── yolo_labels/                # 이미지 1장당 라벨 1개
+│   ├── labels/                     # 이미지 1장당 라벨 1개(yolo_labels)
 │   ├── coco_annotations/           # train, val json
 ├── models/                         # 모델 정의
 ├── notebooks/                      # 데이터 탐색을 위한 노트북
@@ -47,12 +47,19 @@ project/
  
 **1. 필요한 패키지 설치**
 ```bash
-pip install torch torchvision
+# conda 가상 환경을 사용하므로 environment.yml을 사용하여 통일 하면 되지만 아래 사항은 확인 후 진행 해야 함
+# check_cuda.py 실행 하여 cuda 버전 확인 후 설치. cu121 부분이 버전!
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+pip install ultralytics 
+
+# 없다면 
+pip install torch torchvision ultralytics
 ```
  
 **2. 모델 학습 및 평가**
 ```bash
-python main.py
+python main.py --preprocess --model yolo    # 전처리 진행 후 모델 실행
+python main.py --skip --model yolo          # 전처리 생략 후 모델 실행 
 ```
 
 ---

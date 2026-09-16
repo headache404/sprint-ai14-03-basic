@@ -14,6 +14,17 @@ run() 함수 안에 실제 학습/추론 코드를 구현.
     project_root/data/images/val/
     project_root/data/images/test/                  (라벨 없음, 최종 예측용)
     project_root/data/classes_coco.txt               (category_id: 이름 매핑, 참고용)
+
+
+result.py의 make_CSV 함수로 전달 하는 값 형태:
+    sample_predictions = [
+        {"image_id": 1, "category_id": 12778, "bbox": [x, y, w, h], "score": 0.91},
+        {"image_id": 1, "category_id": 3743,  "bbox": [x, y, w, h], "score": 0.78},
+        ...
+    ]
+        
+    make_CSV(sample_predictions, "faster", project_root)
+        
 """
 
 import os
@@ -42,7 +53,7 @@ def run(project_root: str) -> None:
     print(f"  images_val  = {images_val}")
     print(f"  images_test = {images_test}")
 
-    result.make_CSV(project_root)
+    # result.make_CSV()
 
 if __name__ == "__main__":
     # 단독 실행 테스트용 (project_root를 이 파일 기준 상위 폴더로 가정)

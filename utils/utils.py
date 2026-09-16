@@ -315,8 +315,8 @@ def write_yolo_labels(file_list, merged: dict, valid_annotations: list, final_im
 
 
 def write_yolo_support_files(oversampled_train_files: list, all_cat_ids: list, cat_id_to_name: dict,
-                              yolo_root_dir: str, images_train_rel: str = "../images/train",
-                              images_val_rel: str = "../images/val") -> None:
+                              yolo_root_dir: str, images_train_dir: str,
+                              images_val_dir: str) -> None:
     """train_oversampled.txt, data.yaml, classes.txt를 생성한다."""
     os.makedirs(yolo_root_dir, exist_ok=True)
 
@@ -324,14 +324,14 @@ def write_yolo_support_files(oversampled_train_files: list, all_cat_ids: list, c
     oversampled_txt_path = os.path.join(yolo_root_dir, "train_oversampled.txt")
     with open(oversampled_txt_path, "w") as f:
         for fname in oversampled_train_files:
-            f.write(f"{images_train_rel}/{fname}\n")
+            f.write(f"{os.path.join(images_train_dir, fname)}\n")
     print(f"[YOLO 목록] {oversampled_txt_path} -> {len(oversampled_train_files)}줄")
 
     # data.yaml
     names_list = [cat_id_to_name[cid] for cid in all_cat_ids]
     yaml_content = (
-        f"train: ./train_oversampled.txt\n"
-        f"val: {images_val_rel}\n\n"
+        f"train: {oversampled_txt_path}\n"
+        f"val: {images_val_dir}\n\n"
         f"nc: {len(names_list)}\n"
         f"names: {names_list}\n"
     )
@@ -361,8 +361,8 @@ def clean_output_dirs(project_root: str) -> None:
         os.path.join(project_root, "data", "images", "train"),
         os.path.join(project_root, "data", "images", "val"),
         os.path.join(project_root, "data", "images", "test"),
-        os.path.join(project_root, "data", "yolo_labels", "train"),
-        os.path.join(project_root, "data", "yolo_labels", "val"),
+        os.path.join(project_root, "data", "labels", "train"),
+        os.path.join(project_root, "data", "labels", "val"),
     ]
     for d in dirs_to_clean:
         if os.path.exists(d):
@@ -398,7 +398,7 @@ def run_pipeline(
 
     coco_out_dir = os.path.join(project_root, "data", "coco_annotations")
     images_out_dir = os.path.join(project_root, "data", "images")
-    yolo_root_dir = os.path.join(project_root, "data", "yolo_labels")
+    yolo_root_dir = os.path.join(project_root, "data", "labels")
     yolo_labels_dir = yolo_root_dir
 
     print("=" * 60)
@@ -456,7 +456,9 @@ def run_pipeline(
     write_yolo_labels(val_files, merged, valid_annotations, final_images, cat_id_to_yolo_idx,
                        os.path.join(yolo_labels_dir, "val"))
     write_yolo_support_files(oversampled_train_files, all_cat_ids, cat_id_to_name,
-                              yolo_root_dir=yolo_root_dir)
+                          yolo_root_dir=yolo_root_dir,
+                          images_train_dir=os.path.join(images_out_dir, "train"),
+                          images_val_dir=os.path.join(images_out_dir, "val"))
 
     print("\n" + "=" * 60)
     print("전처리 파이프라인 완료")
