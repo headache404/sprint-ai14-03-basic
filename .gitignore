@@ -14,6 +14,10 @@ sprint_ai_project1_data/
 # 파이썬 캐시
 __pycache__/
 
+# YOLO/Ultralytics가 자동으로 다운로드/생성하는 파일들
+*.pt
+runs/
+
 # =========================================================================
 # Exceptions (GitHub에 반드시 올려야 하는 예외 파일 지정)
 # 예) !requirements.txt
