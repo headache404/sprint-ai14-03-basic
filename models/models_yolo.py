@@ -63,7 +63,7 @@ def load_category_id_table(classes_coco_path: str) -> list:
             category_id_table.append(int(category_id_str.strip()))
     return category_id_table
 
-def train_model(data_yaml: str, epochs: int = 100, imgsz: int = 640, device: str = "auto") -> YOLO:
+def train_model(data_yaml: str, epochs: int = 50, imgsz: int = 640, device: str = "auto") -> YOLO:
     """
     YOLOv8n(가장 작고 가벼운 버전) 사전학습 가중치를 불러와서,
     우리 데이터로 추가 학습(파인튜닝).
@@ -76,11 +76,15 @@ def train_model(data_yaml: str, epochs: int = 100, imgsz: int = 640, device: str
     resolved_device = resolve_device(device)
     print(f"[YOLO] 사용 장치: {resolved_device}")
 
-    model = YOLO("yolov8n.pt")
+    model = YOLO("yolo11n.pt")
     model.train(
         data=data_yaml,
         epochs=epochs,
         imgsz=imgsz,
+
+        # 배치사이즈 조정
+        # 기존 auto 16에서 변경
+        # batch=8,
  
         # 회전: 촬영 각도가 70/75/90도로 다양해서 보정용으로 사용
         degrees=10,
@@ -102,17 +106,23 @@ def train_model(data_yaml: str, epochs: int = 100, imgsz: int = 640, device: str
         # Mosaic: 여러 이미지를 이어붙여 학습하는 기법.
         # 원본 이미지 하나에 이미 객체가 2~4개 있어서, 너무 많이 쓰면 오히려 혼란스러울 수 있어 줄임
         mosaic=0.5,
+
+        # mixup: 두 이미지를 섞어서 학습 -> 모델이 더 일반화된 특징을 배우도록 함
+        # copy_paste: 서로 다른 이미지의 객체를 복사해서 새로운 조합을 만들어 희귀 클래스 등장 빈도를 인위적으로 늘리는 효과
+        # mixup=0.1,
+        # copy_paste=0.15
+
     )
     return model
  
  
-def predict_on_test_images(model: YOLO, images_test_dir: str, category_id_table: list, conf: float = 0.001) -> list:
+def predict_on_test_images(model: YOLO, images_test_dir: str, category_id_table: list, conf: float = 0.05) -> list:
     """
     결과를 Kaggle 제출 형식(csv)에 맞는 딕셔너리 리스트로 변환.
  
     conf: confidence(신뢰도) 임계값. 이 값보다 확신이 낮은 탐지 결과는 버림.
     """
-    results = model.predict(source=images_test_dir, conf=conf, save=False, verbose=False)
+    results = model.predict(source=images_test_dir, conf=conf, agnostic_nms=True, save=False, verbose=False)
  
     predictions = []
     for one_image_result in results:

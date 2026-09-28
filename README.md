@@ -1,4 +1,4 @@
-# 🚀 경구약제 이미지 객체 검출(Object Detection) 프로젝트
+# 💊 경구약제 이미지 객체 검출(Object Detection) 프로젝트
  
 이 프로젝트는 Sprint AI14기 Part2 3팀의 Basic Project 입니다  
 이번 프로젝트의 목표는 사진 속에 있는 최대 4개의 알약의 이름(클래스)과 위치(바운딩 박스)를 검출하는 것입니다.
@@ -8,11 +8,11 @@
 🏷️ 팀명 **1423**
 | 이름 | 역할 | GitHub |
 |------|------|--------|
-| 서동현 | Project Leader | [@github](https://github.com/headache404) |
-| 김원태 | Experimentation Lead | [@github](https://github.com/andyKim0313) |
-| 김주희 | Data Engineer | [@github](https://github.com/juhee4839) |
-| 이석우 | Experimentation Lead | [@github](https://github.com/SUKWOOLEE-249) |
-| 조영권 | Model Architect | [@github](https://github.com/Young9won) |
+| 서동현 | Project Leader | [@headache404](https://github.com/headache404) |
+| 김원태 | Experimentation Lead | [@andyKim0313](https://github.com/andyKim0313) |
+| 김주희 | Data Engineer | [@juhee4839](https://github.com/juhee4839) |
+| 이석우 | Experimentation Lead | [@SUKWOOLEE-249](https://github.com/SUKWOOLEE-249) |
+| 조영권 | Model Architect | [@Young9won](https://github.com/Young9won) |
 
 ---
  
@@ -34,58 +34,82 @@ project/
 │   ├── images/                     # train, val, test image
 │   ├── labels/                     # 이미지 1장당 라벨 1개(yolo_labels)
 │   ├── coco_annotations/           # train, val json
+├── docs/                           # 결과 및 보고서
 ├── models/                         # 모델 정의
 ├── notebooks/                      # 데이터 탐색을 위한 노트북
 ├── result/                         # 모델 결과 CSV 파일
+├── sprint_ai_hub/                  # AI_HUB 추가 데이터
+├── sprint_ai_project1_data/        # 기존 제공 된 데이터
 ├── utils/                          # 데이터 로딩 유틸리티
 ├── main.py                         # 메인 실행 스크립트
+├── merge_aihub_class.py            # 기존 제공 된 데이터에 AI_HUB 데이터 병합
+├── clean_bbox.py                   # AI_HUB 데이터 전처리
 ├── environment.yml                 # conda 설치 패키지 목록
 └── README.md
 ```
  
 ## ⚙️ 실행 방법
- 
-**1. 필요한 패키지 설치**
+
+**1. Image, Json 파일 위치**
+```
+sprint_ai_project1_data/
+├── test_images/
+├── train_annotations/
+└── train_images/
+
+sprint_ai_hub/
+├── train_annotations/
+│   └── TL1 ~ TL8/
+└── train_images/
+    └── TL1 ~ TL8/
+```
+
+**2. 필요한 패키지 설치**
 ```bash
 # conda 가상 환경을 사용하므로 environment.yml을 사용하여 통일 하면 되지만 아래 사항은 확인 후 진행 해야 함
-# check_cuda.py 실행 하여 cuda 버전 확인 후 설치. cu121 부분이 버전!
+# nvidia-smi, check_cuda.py 실행 하여 cuda 버전 확인 후 설치. cu121 부분이 버전!
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
-pip install ultralytics 
+pip install ultralytics albumentations
 
 # 없다면 
-pip install torch torchvision ultralytics
+pip install torch torchvision ultralytics albumentations
 ```
  
-**2. 모델 학습 및 평가**
+**3. 모델 학습 및 평가**
 ```bash
-python main.py --preprocess --model yolo    # 전처리 진행 후 모델 실행
+# 1. 기존 제공 데이터 전처리 및 image, json, txt 생성
+python main.py --preprocess                 # 전처리 진행
+
+# 2. AI HUB 데이터 반영
+python merge_aihub_class.py                 # AI_HUB 데이터 반영
+python clean_bbox.py                        # 전처리 진행
+
+# 3. 모델 실행
 python main.py --skip --model yolo          # 전처리 생략 후 모델 실행 
 ```
 
 ---
  
-## 📊 결과
+## 📊 결과 및 보고서
  
- 스크린샷, 출력 예시, 성능 지표(정확도, F1-score 등)를 표나 이미지.
- 
-| 모델 | 정확도 | F1-score |
-|------|--------|----------|
-| Baseline | - | - |
-| Fine-tuned | - | - |
+**1. 최종 Kaggle Score**
+- ![alt text](./docs/score.png)
 
-- [보고서](https://github.com/github_id)
+**2. 발표자료 및 보고서**
+- **[발표자료](https://github.com/github_id)**
+- **[보고서](https://github.com/github_id)**
 
 ---
  
 ## 📋 협업일지
  
-| 이름 | URL |
+| 이름 | 링크 |
 |------|--------|
-| 서동현 | [URL](https://github.com/github_id) |
-| 김원태 | [URL](https://github.com/github_id) |
-| 김주희 | [URL](https://github.com/github_id) |
-| 이석우 | [URL](https://github.com/github_id) |
-| 조영권 | [URL](https://github.com/github_id) |
+| 서동현 | [Notion](https://app.notion.com/p/Daily-3-3d7c6ae3c19f8049b691cee55a60a629) |
+| 김원태 | [Notion](https://app.notion.com/p/3d81cf152dad80aabb74cb081d791a56?v=3d81cf152dad80e7b737000ce0dc7de3&source=copy_link) |
+| 김주희 | [Notion](https://app.notion.com/p/3d7c253c1db580fd95a1f94e6a38e075?v=3ddc253c1db580bd9391000ceb6ffac8&source=copy_link) |
+| 이석우 | [Notion]() |
+| 조영권 | [Notion](https://app.notion.com/p/3a480ec7c5ee8032b2e1cc82f6a97eab?source=copy_link) |
  
 ---
  
