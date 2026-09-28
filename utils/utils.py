@@ -370,6 +370,14 @@ def clean_output_dirs(project_root: str) -> None:
             print(f"[초기화] {d} 삭제됨")
         os.makedirs(d, exist_ok=True)
 
+    # Ultralytics는 라벨 폴더의 캐시(train.cache/val.cache)가 있으면 데이터가 바뀌어도
+    # 재스캔하지 않고 예전 캐시를 재사용할 수 있다. 재실행 시 항상 지워서 최신 라벨을 반영한다.
+    labels_root = os.path.join(project_root, "data", "labels")
+    for cache_name in ["train.cache", "val.cache"]:
+        cache_path = os.path.join(labels_root, cache_name)
+        if os.path.exists(cache_path):
+            os.remove(cache_path)
+            print(f"[초기화] 캐시 삭제: {cache_path}")
 
 def write_coco_classes_txt(final_categories: dict, out_path: str) -> None:
     """category_id: 이름 형식의 참고용 매핑 파일을 생성한다 (COCO category_id 그대로 사용)."""

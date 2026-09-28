@@ -10,6 +10,7 @@ result/*.csv
 
 # project_data 이미지 업로드 제외 합니다
 sprint_ai_project1_data/
+sprint_ai_hub
 
 # 파이썬 캐시
 __pycache__/

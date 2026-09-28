@@ -118,18 +118,17 @@ def visualize_result_csv(result_csv_path: str):
     plt.show()
 '''
 
-'''
-if __name__ == "__main__":
+
+# if __name__ == "__main__":
     # 1. results.csv 파일을 불러와서 시각화 실행하는 부분
     # RESULT_CSV_PATH = r"C:\Users\home\OneDrive\Desktop\코드잇\sprint-ai14-03-basic\results_log\results.csv"
     # visualize_result_csv(RESULT_CSV_PATH)
     
     # 2. 양식에 맞춘 캐글 제출용 CSV 생성 함수 테스트 예시
-    sample_predictions = [
-        {"image_id": 1, "category_id": 12778, "bbox": [100.5, 150.2, 50.1, 80.4], "score": 0.91},
-        {"image_id": 1, "category_id": 3743,  "bbox": [300.0, 350.0, 40.2, 45.1], "score": 0.78}
-    ]
+    # sample_predictions = [
+    #     {"image_id": 1, "category_id": 12778, "bbox": [100.5, 150.2, 50.1, 80.4], "score": 0.91},
+    #     {"image_id": 1, "category_id": 3743,  "bbox": [300.0, 350.0, 40.2, 45.1], "score": 0.78}
+    # ]
     
-    # 모델명과 함께 리스트화하여 제출용 CSV 생성 확인
-    make_CSV(sample_predictions, "yolo", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-'''
+    # # 모델명과 함께 리스트화하여 제출용 CSV 생성 확인
+    # make_CSV(sample_predictions, "yolo", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
