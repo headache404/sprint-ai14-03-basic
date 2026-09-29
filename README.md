@@ -108,7 +108,7 @@ python main.py --skip --model yolo          # 전처리 생략 후 모델 실행
 | 서동현 | [Notion](https://app.notion.com/p/Daily-3-3d7c6ae3c19f8049b691cee55a60a629) |
 | 김원태 | [Notion](https://app.notion.com/p/3d81cf152dad80aabb74cb081d791a56?v=3d81cf152dad80e7b737000ce0dc7de3&source=copy_link) |
 | 김주희 | [Notion](https://app.notion.com/p/3d7c253c1db580fd95a1f94e6a38e075?v=3ddc253c1db580bd9391000ceb6ffac8&source=copy_link) |
-| 이석우 | [Notion]() |
+| 이석우 | [Notion](https://app.notion.com/p/9-11-3d88cbabb78c8016b6b6e36f1349bccb?source=copy_link) |
 | 조영권 | [Notion](https://app.notion.com/p/3a480ec7c5ee8032b2e1cc82f6a97eab?source=copy_link) |
  
 ---
