@@ -96,8 +96,8 @@ python main.py --skip --model yolo          # 전처리 생략 후 모델 실행
 - ![alt text](./docs/score.png)
 
 **2. 발표자료 및 보고서**
-- **[발표자료](https://github.com/github_id)**
-- **[보고서](https://github.com/github_id)**
+- **[발표자료](./docs/1423_AI%20초급%20프로젝트%20최종%20발표%20-%20경구약제%20객체%20검출_v1.1.pptx)**
+- **[보고서](./docs/1423_AI%20초급%20프로젝트%20보고서%20-%20경구약제%20객체%20검출_v1.2.pdf)**
 
 ---
  
