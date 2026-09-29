@@ -96,8 +96,8 @@ python main.py --skip --model yolo          # 전처리 생략 후 모델 실행
 - ![alt text](./docs/score.png)
 
 **2. 발표자료 및 보고서**
-- **[발표자료](./docs/1423_AI%20초급%20프로젝트%20최종%20발표%20-%20경구약제%20객체%20검출_v1.1.pptx?raw=true)**
-- **[보고서](./docs/1423_AI%20초급%20프로젝트%20보고서%20-%20경구약제%20객체%20검출_v1.2.pdf?raw=true)**
+- **[발표자료](https://github.com/headache404/sprint-ai14-03-basic/raw/refs/heads/main/docs/1423_AI%20%EC%B4%88%EA%B8%89%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%B5%9C%EC%A2%85%20%EB%B0%9C%ED%91%9C%20-%20%EA%B2%BD%EA%B5%AC%EC%95%BD%EC%A0%9C%20%EA%B0%9D%EC%B2%B4%20%EA%B2%80%EC%B6%9C_v1.1.pptx)**
+- **[보고서](https://github.com/headache404/sprint-ai14-03-basic/raw/main/docs/1423_AI%20%EC%B4%88%EA%B8%89%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EB%B3%B4%EA%B3%A0%EC%84%9C%20-%20%EA%B2%BD%EA%B5%AC%EC%95%BD%EC%A0%9C%20%EA%B0%9D%EC%B2%B4%20%EA%B2%80%EC%B6%9C_v1.2.pdf)**
 
 ---
  
